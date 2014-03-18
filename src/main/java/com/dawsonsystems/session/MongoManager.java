@@ -467,6 +467,8 @@ public class MongoManager extends LifecycleBase implements Manager {
 
       List<ServerAddress> addrs = new ArrayList<ServerAddress>();
 
+      log.info("Connecting to Mongo " + host + "/" + database + " for session storage");
+      
       for (String host : hosts) {
         addrs.add(new ServerAddress(host, getPort()));
       }
@@ -484,10 +486,19 @@ public class MongoManager extends LifecycleBase implements Manager {
   }
   
   private void authenticate() {
-    if (!db.authenticate(username, password.toCharArray())) {
-      throw new RuntimeException("Mongo authentication error");
-    }
+      if(!isUserAndPasswordProvided()){
+    	  log.info("Username or password not found, not using authentication");
+    	  return;
+      }
+	  if (!db.authenticate(username, password.toCharArray())) {
+	      throw new RuntimeException("Mongo authentication error");
+	  }
   }
+
+	private boolean isUserAndPasswordProvided() {
+		return username != null && username.length() > 0 && password != null
+				&& password.length() > 0;
+	}
 
   private void initSerializer() throws LifecycleException {
     serializer = new JavaSerializer();
