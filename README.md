@@ -28,8 +28,9 @@ The following parameters are available on the Manager :-
 <table>
 <tr><td>maxInactiveInterval</td><td>The initial maximum time interval, in seconds, between client requests before a session is invalidated. A negative value will result in sessions never timing out. If the attribute is not provided, a default of 60 seconds is used.</td></tr>
 <tr><td>processExpiresFrequency</td><td>Frequency of the session expiration, and related manager operations. Manager operations will be done once for the specified amount of backgrondProcess calls (i.e., the lower the amount, the more often the checks will occur). The minimum value is 1, and the default value is 6. </td></tr>
-<tr><td>host</td><td>The database hostnames(s). Multiple hosts can be entered, seperated by a comma</td></tr>
-<tr><td>port</td><td>The database port to connect to. The same port will be used for each database host. The default is 27017</td></tr>
+<tr><td>uri</td><td>The URI to connect to. In the format: mongodb://host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]</td></tr>
+<tr><td>host</td><td>The database hostnames(s). Multiple hosts can be entered, seperated by a comma. Ignored if uri is provided.</td></tr>
+<tr><td>port</td><td>The database port to connect to. The same port will be used for each database host. The default is 27017. Ignored if uri is provided.</td></tr>
 <tr><td>database</td><td>The database used to store sessions in, the default is 'sessions'</td></tr>
 <tr><td>username</td><td>username for session database</td></tr>
 <tr><td>password</td><td>password for session database</td></tr>
